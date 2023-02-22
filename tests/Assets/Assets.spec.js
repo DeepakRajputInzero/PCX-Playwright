@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { assets } from "../../pages/assets.js";
 
-test.describe("Login Test", () => {
+test.describe("Create New Assets record", () => {
     test.beforeEach(async ({ page }) => {
       await page.goto(
         "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
@@ -11,7 +11,7 @@ test.describe("Login Test", () => {
     test.afterEach(async ({page})=>{
         await page.close();
       });
-    test("Login Test-Postive Test-User Name/Password", async ({ page }) => {
+    test("Create New Instrument record- Manual Test", async ({ page }) => {
         const login = new assets(page);
         await login.login('deepakr@inzerotech.com', 'Deepak@605');
         await page.pause();
