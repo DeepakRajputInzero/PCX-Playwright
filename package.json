@@ -1,11 +1,11 @@
 {
   "name": "pcx-primetech-calibration",
   "version": "1.0.0",
-  "description": "",
+  "description": "PCX-PrimeTech",
   "main": "index.js",
   "scripts": {},
   "keywords": [],
-  "author": "",
+  "author": "Deepak R",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.31.0"
