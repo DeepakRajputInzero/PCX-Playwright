@@ -13,10 +13,14 @@ test.describe("Create New Assets record", () => {
       });
     test("Create New Instrument record- Manual Test", async ({ page }) => {
         const login = new assets(page);
+        //Login to Application
         await login.login('deepakr@inzerotech.com', 'Deepak@605');
         await page.pause();
+        //Click on New 
         await page.getByRole('link', { name: ' New' }).click();
+        //Click on New Instrument
         await page.getByText('Instrument').click();
+        //Fill Page Details
         await page.locator('#dialog-asset-id').click();
         await page.locator('#dialog-asset-id').fill('ASSETS-01');
         await page.locator('#dialog-asset-name').click();
@@ -24,7 +28,9 @@ test.describe("Create New Assets record", () => {
         await page.locator('#dialog-asset-manufacturer').click();
         await page.locator('#dialog-asset-manufacturer').fill('fluke');
         await page.locator('#ui-id-3').click();
-        await page.locator('select[name="PhysicalLocationId"]').selectOption('63');
+        await page.locator('select[name=\'PhysicalLocationId\']', 'H&R Plant');
+        const selectValue = await page.$eval("select[name=\'PhysicalLocationId\']", (element) => element.value);
+        expect(selectValue).toContain('H&R Plant');
         await page.locator('input[name="ModelNumber"]').click();
         await page.locator('input[name="ModelNumber"]').fill('258');
         await page.locator('input[name="FunctionalLocation"]').click();
