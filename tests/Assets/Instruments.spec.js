@@ -175,7 +175,7 @@ test.describe("Create New Assets record", () => {
       await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeHigh"]').fill('50');
       await page.locator('select[name="TestSpecification\\.SwitchTest\\.RangeResolution"]').selectOption('2');
 
-      await page.pause();
+      // await page.pause();
       await page.locator("//*[@id='dialog-test-specification-type-container']/div[3]/div[5]/div/div[1]/input").fill('nm');
       await page.locator("//*[@id='dialog-test-specification-type-container']/div[3]/div[5]/div/div[2]/div/div[49]").click();
       await page.locator('//*[@id="dialog-test-specification-type-container"]/div[5]/div[2]/table/tbody/tr/td[2]/div[1]/input[@name="TestSpecification.SwitchTest.SetPoints[0].Value"]').fill('2');
