@@ -15,7 +15,6 @@ exports.assets = class assets{
         await this.username_textbox.fill(username);
         await this.password_textbox.fill(password);
         await this.login_button.click();
-        const rando = Math.random().toNumber(3);
     }
     
 }
