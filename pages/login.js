@@ -4,7 +4,7 @@ exports.loginPage = class loginPage{
         this.page = page
         this.username_textbox = page.locator("input[name='Email']");
         this.password_textbox = page.locator("input[name='Password']");
-        this.login_button = page.getByRole("button", { name: "Sign in" });
+        this.login_button = page.locator("//*[@id='login-button']");
     }
 
     async gotoLoginPage(){
