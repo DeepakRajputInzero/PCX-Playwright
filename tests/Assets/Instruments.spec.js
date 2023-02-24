@@ -22,6 +22,8 @@ test.describe("Create New Assets record", () => {
         await page.getByRole('link', { name: ' New' }).click();
         //Click on New Instrument
         await page.getByText('Instrument').click();
+        //Maximize window
+        await page.locator('//body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/i[1]').click();
         //Fill Page Details
         const rando = Math.random().toString(36).substring(2,7);
         let locString = 'Asset-id' + rando;
@@ -63,8 +65,8 @@ test.describe("Create New Assets record", () => {
         await page.locator('#dialog-asset-remarks').fill('Calibration');
         //Click on Test Standard Tab
         await page.getByRole('listitem').filter({ hasText: 'Test Specifications' }).click();
-        const rando1 = Math.random().toString(36).substring(2,7);
-        let locString1 = 'Asset-Calibration' + rando1;
+        
+        let locString1 = 'Asset-Calibration' + rando;
         await page.locator('#dialog-test-specification-title').click();
         await page.locator('#dialog-test-specification-title').fill(locString1);
         await page.locator('#dialog-test-specification-type-id').selectOption('1');
