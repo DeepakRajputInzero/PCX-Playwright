@@ -175,17 +175,18 @@ test.describe("Create New Assets record", () => {
       await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeHigh"]').fill('50');
       await page.locator('select[name="TestSpecification\\.SwitchTest\\.RangeResolution"]').selectOption('2');
 
-      // await page.pause();
+      await page.pause();
       await page.locator("//*[@id='dialog-test-specification-type-container']/div[3]/div[5]/div/div[1]/input").fill('nm');
       await page.locator("//*[@id='dialog-test-specification-type-container']/div[3]/div[5]/div/div[2]/div/div[49]").click();
       await page.locator('//*[@id="dialog-test-specification-type-container"]/div[5]/div[2]/table/tbody/tr/td[2]/div[1]/input[@name="TestSpecification.SwitchTest.SetPoints[0].Value"]').fill('2');
       await page.locator('//*[@id="dialog-set-points-form-group"]/div[2]/table/tbody/tr/td[3]/select[@name="TestSpecification.SwitchTest.SetPoints[0].DirectionId"]').selectOption('1');
-      // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.Tolerance"]').fill('5');
-      // await page.getByRole('button', { name: 'Save and Close' }).click();
+      await page.locator('//*[@id="dialog-set-points-form-group"]/div[2]/table/tbody/tr/td[4]/select[@name="TestSpecification.SwitchTest.SetPoints[0].TripStateId"]').selectOption('2');
+      
+      await page.getByRole('button', { name: 'Save and Close' }).click();
 
-      // await page.locator(".avatar-initials").click();
-      // await page.getByText("Sign Out").click();
-      // await page.waitForTimeout(2000);
+      await page.locator(".avatar-initials").click();
+      await page.getByText("Sign Out").click();
+      await page.waitForTimeout(2000);
   });
   });
 
