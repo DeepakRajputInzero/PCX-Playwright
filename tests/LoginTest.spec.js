@@ -15,15 +15,8 @@ test.describe("Login Test", () => {
   test("Login Test-Postive Test-User Name/Password", async ({ page }) => {
     const login = new loginPage(page);
     await login.login('deepakr@inzerotech.com', 'Deepak@605');
-    await page.locator(".avatar-initials").click();
+    await page.hover(".avatar-initials");
     await page.getByText("Sign Out").click();
-
-    // await page.locator("input[name='Email']").fill("deepakr@inzerotech.com");
-    // await expect(page).toHaveTitle(/.*PCX - Sign in/);
-    // await page.locator("input[name='Password']").fill("Deepak@605");
-    // await page.getByRole("button", { name: "Sign in" }).click();
-    // await page.locator(".avatar-initials").click();
-    // await page.getByText("Sign Out").click();
   });
 
   test("Login Test Correct User Name and Incorrect Password-Negative Test", async ({
