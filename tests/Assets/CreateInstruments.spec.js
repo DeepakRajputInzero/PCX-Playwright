@@ -1,13 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { assets } from "../../pages/assets.js";
 
+test.beforeEach(async ({ page }) => {
+  await page.goto(
+    "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
+  );
+});
 
 test.describe("Create New Assets record", () => {
-    test.beforeEach(async ({ page }) => {
-      await page.goto(
-        "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
-      );
-    });
+    
 
     test.afterEach(async ({page})=>{
         await page.close();
@@ -35,8 +36,8 @@ test.describe("Create New Assets record", () => {
         {
           return Math.floor(Math.random()*(max-min+1)+min);
         }
-        // const rando = Math.random().toString(36).substring(2,7);
-        let locString = 'Asset-Id-' + randomNumber;
+        
+        let locString = 'Asset-Id-00' + randomNumber;
        //random value input in Asset ID
         await page.locator('#dialog-asset-id').click();
         await page.locator('#dialog-asset-id').fill(locString);
@@ -121,8 +122,8 @@ test.describe("Create New Assets record", () => {
       {
         return Math.floor(Math.random()*(max-min+1)+min);
       }
-      // const rando = Math.random().toString(36).substring(2,7);
-      let locString = 'Switch-Id-' + randomNumber;
+     
+      let locString = 'Switch-Id-00' + randomNumber;
      //random value input in Asset ID
       await page.locator('#dialog-asset-id').click();
       await page.locator('#dialog-asset-id').fill(locString);
@@ -212,7 +213,7 @@ test.describe("Create New Assets record", () => {
     {
       return Math.floor(Math.random()*(max-min+1)+min);
     }
-    // const rando = Math.random().toString(36).substring(2,7);
+    
     let locString = 'Test Point-Id-' + randomNumber;
    //random value input in Asset ID
     await page.locator('#dialog-asset-id').click();
@@ -278,7 +279,7 @@ test.describe("Create New Assets record", () => {
     await page.locator(".avatar-initials").click();
     await page.waitForTimeout(100)
     await page.getByText("Sign Out").click();
-    // await page.waitForTimeout(2000);
+
   });
 });
 
