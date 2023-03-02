@@ -1,14 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { assets } from "../../pages/assets.js";
 
-test.beforeEach(async ({ page }) => {
-  await page.goto(
-    "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
-  );
-});
+
 
 test.describe("Create New Assets record", () => {
-    
+  test.beforeEach(async ({ page }) => {
+    await page.goto(
+      "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
+    );
+  });
 
     test.afterEach(async ({page})=>{
         await page.close();
