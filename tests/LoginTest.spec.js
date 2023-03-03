@@ -15,8 +15,10 @@ test.describe("Login Test", () => {
   test("Login Test-Postive Test-User Name/Password", async ({ page }) => {
     const login = new loginPage(page);
     await login.login('deepakr@inzerotech.com', 'Deepak@605');
-    await page.hover(".avatar-initials");
+    await page.locator(".avatar-initials").click();
     await page.getByText("Sign Out").click();
+
+   
   });
 
   test("Login Test Correct User Name and Incorrect Password-Negative Test", async ({

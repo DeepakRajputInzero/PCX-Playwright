@@ -95,8 +95,8 @@ test.describe("Create New Assets record", () => {
         await page.getByRole('button', { name: 'Save and Close' }).click();
 
         await page.locator(".avatar-initials").click();
-        await page.getByText("Sign Out").click();
-        // await page.waitForTimeout(2000);
+        await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
+        await page.waitForTimeout(100);
     });
 
     test("Create New Instrument record- Switch Test", async ({ page }) => {
@@ -186,7 +186,7 @@ test.describe("Create New Assets record", () => {
       await page.getByRole('button', { name: 'Save and Close' }).click();
 
       await page.locator(".avatar-initials").click();
-      await page.getByText("Sign Out").click();
+      await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
       // await page.waitForTimeout(2000);
   });
 
@@ -277,9 +277,9 @@ test.describe("Create New Assets record", () => {
     await page.getByRole('button', { name: 'Save and Close' }).click();
 
     await page.locator(".avatar-initials").click();
-    await page.waitForTimeout(100)
-    await page.getByText("Sign Out").click();
 
+    await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
+    await page.waitForTimeout(100);
   });
 });
 
