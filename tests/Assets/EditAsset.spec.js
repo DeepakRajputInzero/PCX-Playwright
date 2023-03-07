@@ -3,7 +3,7 @@ import { assets } from "../../pages/assets.js";
 
 
 
-test.describe("Create New Loop record", () => {
+test.describe("Create Edit Asset record and Update", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(
       "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
@@ -21,6 +21,8 @@ test.describe("Create New Loop record", () => {
         
         //Click on Asset tab        
         await page.getByRole('link', { name: ' Assets' }).click();
+        //Click on New 
+        // await page.getByRole('link', { name: ' New' }).click();
        
         await page.click('//body/div[1]/main/div/div[2]/div/div/div/div/div[2]/table/tbody/tr[1]/td');
         await page.locator('div:nth-child(2) > i').first().click();
