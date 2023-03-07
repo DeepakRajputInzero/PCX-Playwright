@@ -1,20 +1,19 @@
 import { test, expect } from "@playwright/test";
 import { assets } from "../../pages/assets.js";
 
-
-
-test.describe("Create New Instruments record", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(
-      "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
-    );
-  });
+test.describe("Create New Test Standard record", () => {
+    
+    test.beforeEach(async ({ page }) => {
+        await page.goto(
+          "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
+        );
+      });
 
     test.afterEach(async ({page})=>{
         await page.close();
       });
 
-test("Create New Instrument record- Switch Test", async ({ page }) => {
+test("Create New Test Standard record- Test Point Accuracy", async ({ page }) => {
  
     const login = new assets(page);
     //Login to Application
@@ -37,8 +36,8 @@ test("Create New Instrument record- Switch Test", async ({ page }) => {
     {
       return Math.floor(Math.random()*(max-min+1)+min);
     }
-   
-    let locString = 'Switch-Id-00' + randomNumber;
+    
+    let locString = 'Test Point-Id-00' + randomNumber;
    //random value input in Asset ID
     await page.locator('#dialog-asset-id').click();
     await page.locator('#dialog-asset-id').fill(locString);
@@ -78,30 +77,32 @@ test("Create New Instrument record- Switch Test", async ({ page }) => {
     //Click on Test Standard Tab
     await page.getByRole('listitem').filter({ hasText: 'Test Specifications' }).click();
     
-    let locString1 = 'Asset-Calibration-' + randomNumber;
+    let locString1 = 'Test Standard-Calibration-00' + randomNumber;
     await page.locator('#dialog-test-specification-title').click();
     await page.locator('#dialog-test-specification-title').fill(locString1);
     
-    await page.locator('#dialog-test-specification-type-id').selectOption('2');
-    await page.locator('input[name="TestSpecification\\.SwitchTest\\.SetPointTolerance"]').click();
-    await page.locator('input[name="TestSpecification\\.SwitchTest\\.SetPointTolerance"]').fill('5');
-    await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeLow"]').click();
-    await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeLow"]').fill('10');
-    await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeHigh"]').click();
-    await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeHigh"]').fill('50');
-    await page.locator('select[name="TestSpecification\\.SwitchTest\\.RangeResolution"]').selectOption('2');
-
+    await page.locator('#dialog-test-specification-type-id').selectOption('3');
+    await page.locator("//*[@id='tab-asset-test-specifications']/div[2]/div/div/select[@id='dialog-test-specification-strategy-id']").selectOption('3');
+   
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[3]/div[2]/input').click();
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[3]/div[2]/input').fill('10');
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[3]/div[3]/input').click();
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[3]/div[3]/input').fill('50');
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[3]/div[4]/select').selectOption('2');
     // await page.pause();
-    await page.locator("//*[@id='dialog-test-specification-type-container']/div[3]/div[5]/div/div[1]/input").fill('nm');
-    await page.locator("//*[@id='dialog-test-specification-type-container']/div[3]/div[5]/div/div[2]/div/div[49]").click();
-    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[5]/div[2]/table/tbody/tr/td[2]/div[1]/input[@name="TestSpecification.SwitchTest.SetPoints[0].Value"]').fill('2');
-    await page.locator('//*[@id="dialog-set-points-form-group"]/div[2]/table/tbody/tr/td[3]/select[@name="TestSpecification.SwitchTest.SetPoints[0].DirectionId"]').selectOption('1');
-    await page.locator('//*[@id="dialog-set-points-form-group"]/div[2]/table/tbody/tr/td[4]/select[@name="TestSpecification.SwitchTest.SetPoints[0].TripStateId"]').selectOption('2');
+    await page.locator('div:nth-child(5) > .selectize-control > .selectize-input').click();
+  
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[3]/div[5]/div/div[1]/input').fill('nm');
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[3]/div[5]/div/div[2]/div/div[49]').click();
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[5]/div[2]/select').selectOption('1');
+    await page.locator('//*[@id="dialog-test-specification-type-container"]/div[5]/div[3]/input').fill('1');
     
     await page.getByRole('button', { name: 'Save and Close' }).click();
 
     await page.locator(".avatar-initials").click();
-    await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
-    // await page.waitForTimeout(2000);
-    });
+    await page.waitForTimeout(100)
+    await page.getByText("Sign Out").click();
+
+  });
+
 });

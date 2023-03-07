@@ -1,19 +1,18 @@
 import { test, expect } from "@playwright/test";
 import { assets } from "../../pages/assets.js";
 
-
-
-test.describe("Create New Assets record", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(
-      "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
-    );
-  });
+test.describe("Create New Test Standard record", () => {
+    
+    test.beforeEach(async ({ page }) => {
+        await page.goto(
+          "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
+        );
+      });
 
     test.afterEach(async ({page})=>{
         await page.close();
       });
-    test("Create New Instrument record- Manual Test", async ({ page }) => {
+    test("Create New Test Standard record- Manual Test", async ({ page }) => {
  
         const login = new assets(page);
         //Login to Application
@@ -23,7 +22,7 @@ test.describe("Create New Assets record", () => {
         //Click on New 
         await page.getByRole('link', { name: ' New' }).click();
         //Click on New Instrument
-        await page.getByText('Instrument').click();
+        await page.getByText('Test Standard').click();
         //Maximize window
         await page.locator('//body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/i[1]').click();
         //Fill Page Details
@@ -37,7 +36,7 @@ test.describe("Create New Assets record", () => {
           return Math.floor(Math.random()*(max-min+1)+min);
         }
         
-        let locString = 'Asset-Id-00' + randomNumber;
+        let locString = 'Test Standard-Id-00' + randomNumber;
        //random value input in Asset ID
         await page.locator('#dialog-asset-id').click();
         await page.locator('#dialog-asset-id').fill(locString);
@@ -47,11 +46,11 @@ test.describe("Create New Assets record", () => {
         await page.locator('#dialog-asset-manufacturer').fill('fluke');
         await page.locator('#ui-id-3').click();
         await page.locator('select[name=\'PhysicalLocationId\']').selectOption('51');
-       
+        // await page.pause();
         await page.locator('input[name="ModelNumber"]').click();
         await page.locator('input[name="ModelNumber"]').fill('258');
-        await page.locator('input[name="FunctionalLocation"]').click();
-        await page.locator('input[name="FunctionalLocation"]').fill('Noise Room');
+        // await page.locator('input[name="FunctionalLocation"]').click();
+        // await page.locator('input[name="FunctionalLocation"]').fill('Noise Room');
         await page.locator('input[name="SerialNumber"]').click();
         await page.locator('input[name="SerialNumber"]').fill('25886');
       
@@ -77,7 +76,7 @@ test.describe("Create New Assets record", () => {
         //Click on Test Standard Tab
         await page.getByRole('listitem').filter({ hasText: 'Test Specifications' }).click();
         
-        let locString1 = 'Asset-Calibration-' + randomNumber;
+        let locString1 = 'Test-Calibration-00' + randomNumber;
         await page.locator('#dialog-test-specification-title').click();
         await page.locator('#dialog-test-specification-title').fill(locString1);
         await page.locator('#dialog-test-specification-type-id').selectOption('1');
@@ -95,9 +94,7 @@ test.describe("Create New Assets record", () => {
         await page.getByRole('button', { name: 'Save and Close' }).click();
 
         await page.locator(".avatar-initials").click();
-        await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
-        await page.waitForTimeout(100);
-    });    
+        await page.getByText("Sign Out").click();
+       
+    });  
 });
-
-;

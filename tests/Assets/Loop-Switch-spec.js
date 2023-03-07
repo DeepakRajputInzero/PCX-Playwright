@@ -3,7 +3,7 @@ import { assets } from "../../pages/assets.js";
 
 
 
-test.describe("Create New Assets record", () => {
+test.describe("Create New Loop record", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(
       "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"

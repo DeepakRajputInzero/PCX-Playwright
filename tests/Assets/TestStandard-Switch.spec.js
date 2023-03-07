@@ -1,19 +1,19 @@
 import { test, expect } from "@playwright/test";
 import { assets } from "../../pages/assets.js";
 
-
-
-test.describe("Create New Assets record", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(
-      "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
-    );
-  });
+test.describe("Create New Test Standard record", () => {
+    
+    test.beforeEach(async ({ page }) => {
+        await page.goto(
+          "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
+        );
+      });
 
     test.afterEach(async ({page})=>{
         await page.close();
       });
-    test("Create New Instrument record- Manual Test", async ({ page }) => {
+
+      test("Create New Test Standard record- Switch Test", async ({ page }) => {
  
         const login = new assets(page);
         //Login to Application
@@ -29,15 +29,15 @@ test.describe("Create New Assets record", () => {
         //Fill Page Details
         var minNumber = 100;
         var maxNumber = 40
-
+  
         var randomNumber = randomNumberFromRange(minNumber, maxNumber);
-
+  
         function randomNumberFromRange(min,max)
         {
           return Math.floor(Math.random()*(max-min+1)+min);
         }
-        
-        let locString = 'Asset-Id-00' + randomNumber;
+       
+        let locString = 'Switch-Id-00' + randomNumber;
        //random value input in Asset ID
         await page.locator('#dialog-asset-id').click();
         await page.locator('#dialog-asset-id').fill(locString);
@@ -80,24 +80,27 @@ test.describe("Create New Assets record", () => {
         let locString1 = 'Asset-Calibration-' + randomNumber;
         await page.locator('#dialog-test-specification-title').click();
         await page.locator('#dialog-test-specification-title').fill(locString1);
-        await page.locator('#dialog-test-specification-type-id').selectOption('1');
-        await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeLow"]').click();
-        await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeLow"]').fill('10');
-        await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeHigh"]').click();
-        await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeHigh"]').fill('50');
-        await page.locator('select[name="TestSpecification\\.ManualPassFail\\.RangeResolution"]').selectOption('2');
+        
+        await page.locator('#dialog-test-specification-type-id').selectOption('2');
+        await page.locator('input[name="TestSpecification\\.SwitchTest\\.SetPointTolerance"]').click();
+        await page.locator('input[name="TestSpecification\\.SwitchTest\\.SetPointTolerance"]').fill('5');
+        await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeLow"]').click();
+        await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeLow"]').fill('10');
+        await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeHigh"]').click();
+        await page.locator('input[name="TestSpecification\\.SwitchTest\\.RangeHigh"]').fill('50');
+        await page.locator('select[name="TestSpecification\\.SwitchTest\\.RangeResolution"]').selectOption('2');
+  
         // await page.pause();
-        await page.locator("//*[@id='dialog-test-specification-type-container']/div[1]/div[5]/div/div/input").fill('nm');
-        await page.locator("//*[@id='dialog-test-specification-type-container']/div[1]/div[5]/div/div[2]/div/div[49]").click();
-        await page.locator('select[name="TestSpecification\\.ManualPassFail\\.ToleranceTypeId"]').selectOption('2');
-        await page.locator('input[name="TestSpecification\\.ManualPassFail\\.Tolerance"]').click();
-        await page.locator('input[name="TestSpecification\\.ManualPassFail\\.Tolerance"]').fill('5');
+        await page.locator("//*[@id='dialog-test-specification-type-container']/div[3]/div[5]/div/div[1]/input").fill('nm');
+        await page.locator("//*[@id='dialog-test-specification-type-container']/div[3]/div[5]/div/div[2]/div/div[49]").click();
+        await page.locator('//*[@id="dialog-test-specification-type-container"]/div[5]/div[2]/table/tbody/tr/td[2]/div[1]/input[@name="TestSpecification.SwitchTest.SetPoints[0].Value"]').fill('2');
+        await page.locator('//*[@id="dialog-set-points-form-group"]/div[2]/table/tbody/tr/td[3]/select[@name="TestSpecification.SwitchTest.SetPoints[0].DirectionId"]').selectOption('1');
+        await page.locator('//*[@id="dialog-set-points-form-group"]/div[2]/table/tbody/tr/td[4]/select[@name="TestSpecification.SwitchTest.SetPoints[0].TripStateId"]').selectOption('2');
+        
         await page.getByRole('button', { name: 'Save and Close' }).click();
-
+  
         await page.locator(".avatar-initials").click();
-        await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
+        await page.getByText("Sign Out").click();
         await page.waitForTimeout(100);
-    });    
+    });
 });
-
-;

@@ -16,7 +16,7 @@ test.describe("Create New Assets record", () => {
  
     const login = new assets(page);
     //Login to Application
-    await expect(page).toHaveTitle(/.*PCX - Sign in/);
+    await expect(page).toHaveTitle('PCX - Sign In');
     await login.login('deepakr@inzerotech.com', 'Deepak@605');
   
     //Click on New 
@@ -33,6 +33,13 @@ test.describe("Create New Assets record", () => {
 
     function randomNumberFromRange(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    
+    function formatDate (secs) {
+      const date = new Date(0)
+      date.setUTCSeconds(secs)
+      return date.toLocaleDateString()
     }
   
     let locString = 'Test Point-Id-' + randomNumber;
@@ -62,11 +69,13 @@ test.describe("Create New Assets record", () => {
     await page.locator('//*[@id="tab-asset-details"]/div[3]/div[3]/select').selectOption('3');
 
     // Date pic
+    const CDate = formatDate();
     await page.click('//*[@id="tab-asset-details"][@id="tab-asset-details"]/div[3]/div[2]/div/span/i')
-    const mmYY = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/div')
-    const prev = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/a[1]')
-    const next = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/a[2]')
-    await next.click();
+    await page.locator('//*[@id="tab-asset-details"]/div[3]/div[2]/div/input').fill(CDate);
+    // const mmYY = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/div')
+    // const prev = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/a[1]')
+    // const next = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/a[2]')
+    // await next.click();
     await page.click('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/table/tbody/tr[4]/td[6]/a')
 
   
@@ -97,7 +106,7 @@ test.describe("Create New Assets record", () => {
   
     await page.getByRole('button', { name: 'Save and Close' }).click();
 
-    await page.locator(".avatar-initials").click();
+    await page.locator("/html/body/header/div[2]/ul/li[4]/div/ul").click();
 
     await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
     await page.waitForTimeout(100);
