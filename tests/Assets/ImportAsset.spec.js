@@ -17,7 +17,7 @@ test.describe("Create New record and update", () => {
 
       test('Import Asset Record and update', async({ page} ) => {
         const login = new assets(page);
-        const filepath0 = '../Assets/assets_1.xlsx';
+        const filepath0 = './fixture/file/AssetsImport.xlsx';
         //Login to Application
         await expect(page).toHaveTitle('PCX - Sign In');
         await login.login('deepakr@inzerotech.com', 'Deepak@605');  
@@ -27,7 +27,7 @@ test.describe("Create New record and update", () => {
         await page.getByRole('link', { name: ' New' }).click();
         // await page.getByRole('listitem').filter({ hasText: 'Import Assets' }).click();
         await page.getByText('Import Assets').click();
-        await page.setInputFiles('#selected-file', './fixture/file/AssetsImport.xlsx');
+        await page.setInputFiles('#selected-file', filepath0);
         await page.click('#asset-import-select-button[type="button"]');
         await page.waitForTimeout(1000);
         await page.locator(".avatar-initials").click();

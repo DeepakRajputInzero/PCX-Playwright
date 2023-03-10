@@ -2,9 +2,9 @@ exports.loginPage = class loginPage{
 
     constructor(page){
         this.page = page
-        this.username_textbox = page.locator("input[name='Email']");
-        this.password_textbox = page.locator("input[name='Password']");
-        this.login_button = page.locator("//*[@id='login-button']");
+        this.username_textbox = page.$("input[name='Email']");
+        this.password_textbox = page.$("input[name='Password']");
+        this.login_button = page.$("//*[@id='login-button']");
     }
 
     async gotoLoginPage(){
