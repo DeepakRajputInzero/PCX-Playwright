@@ -29,7 +29,7 @@ test.describe("Create New record and update", () => {
         //Maximize window
         await page.locator('//body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/i[1]').click();
         //Fill Page Details
-        var minNumber = 100;
+        var minNumber = 1000;
         var maxNumber = 40
 
         var randomNumber = randomNumberFromRange(minNumber, maxNumber);
