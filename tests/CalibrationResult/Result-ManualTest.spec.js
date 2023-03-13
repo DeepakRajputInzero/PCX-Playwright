@@ -293,6 +293,6 @@ test.describe("Create New record and update", () => {
         "//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]"
       )
       .click();
-    await page.waitForTimeout(100);
+    
   });
 });
