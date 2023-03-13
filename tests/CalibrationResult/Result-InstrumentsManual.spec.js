@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { assets } from "../../pages/assets.js";
 
-test.describe("Create New record and update", () => {
+test.describe("Create New record and update Calibration Result_Manual Test", () => {
   test.beforeEach(async ({ page }) => {
     //Application Url
     await page.goto(
@@ -13,7 +13,7 @@ test.describe("Create New record and update", () => {
     await page.close();
   });
 
-  test("Create Asset Record and update", async ({ page }) => {
+  test("Create Asset Record and update Calibration Result- Manual Test", async ({ page }) => {
     const login = new assets(page);
     const filepath0 = "./fixture/file/AssetsImport.xlsx";
     //Login to Application
@@ -35,8 +35,8 @@ test.describe("Create New record and update", () => {
       .click();
     //Fill Page Details
     //Random Number Genrater
-    var minNumber = 1000;
-    var maxNumber = 40;
+    var minNumber = 10;
+    var maxNumber = 1000;
     var randomNumber = randomNumberFromRange(minNumber, maxNumber);
 
     function randomNumberFromRange(min, max) {
@@ -288,11 +288,7 @@ test.describe("Create New record and update", () => {
     await page.waitForTimeout(100);
     // Sign Out from Application
     await page.locator(".avatar-initials").click();
-    await page
-      .locator(
-        "//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]"
-      )
-      .click();
+    await page.getByText('Sign Out').click();
     
   });
 });
