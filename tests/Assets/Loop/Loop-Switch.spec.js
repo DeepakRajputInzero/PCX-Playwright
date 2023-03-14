@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { assets } from "../../pages/assets.js";
+import { assets } from "../../../pages/assets.js";
 
 
 
@@ -14,8 +14,7 @@ test.describe("Create New Loop record", () => {
         await page.close();
       });
 
-      test("Create New Instrument record- Manual Test", async ({ page }) => {
- 
+      test("Create New Loop record-Switch Test", async({ page }) => {
         const login = new assets(page);
         //Login to Application
         await expect(page).toHaveTitle('PCX - Sign In');
@@ -59,7 +58,7 @@ test.describe("Create New Loop record", () => {
         await page.locator('input[name="FunctionalLocation"]').fill('Noise Room');
         await page.click('//*[@id="tab-asset-details"]/div[3]/div[3]/select');
         await page.locator('//*[@id="tab-asset-details"]/div[3]/div[3]/select').selectOption('3');
-        //Manual Date field method
+         //Manual Date field method
         //  await page.pause()
         // const date = "04/06/2023"
         // page.fill('//*[@id="tab-asset-details"]/div[3]/div[2]/div/input', date);
@@ -88,7 +87,7 @@ test.describe("Create New Loop record", () => {
         // let locString1 = 'Asset-Calibration-' + randomNumber;
         // await page.locator('#dialog-test-specification-title').click();
         // await page.locator('#dialog-test-specification-title').fill(locString1);
-        // await page.locator('#dialog-test-specification-type-id').selectOption('1');
+        // await page.locator('#dialog-test-specification-type-id').selectOption('2');
         // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeLow"]').click();
         // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeLow"]').fill('10');
         // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeHigh"]').click();
@@ -104,5 +103,5 @@ test.describe("Create New Loop record", () => {
         await page.locator(".avatar-initials").click();
         await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
         await page.waitForTimeout(100);
-    });
-  });
+      });
+});
