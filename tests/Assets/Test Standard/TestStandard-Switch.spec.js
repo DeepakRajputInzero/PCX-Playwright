@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { assets } from "../../pages/assets.js";
+import { assets } from "../../../pages/assets.js";
 
 test.describe("Create New Test Standard record", () => {
   test.beforeEach(async ({ page }) => {
@@ -20,8 +20,9 @@ test.describe("Create New Test Standard record", () => {
 
     //Click on New
     await page.getByRole("link", { name: " New" }).click();
+    // await page.pause();
     //Click on New Instrument
-    await page.getByText("Instrument").click();
+    await page.getByText('Test Standard').click();
     //Maximize window
     await page
       .locator("//body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/i[1]")
@@ -36,7 +37,7 @@ test.describe("Create New Test Standard record", () => {
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
-    let locString = "Switch-Id-00" + randomNumber;
+    let locString = "TS-SwitchTest-Id-00" + randomNumber;
     //random value input in Asset ID
     await page.locator("#dialog-asset-id").click();
     await page.locator("#dialog-asset-id").fill(locString);
@@ -48,11 +49,11 @@ test.describe("Create New Test Standard record", () => {
     await page.locator("select[name='PhysicalLocationId']").selectOption("51");
 
     await page.locator('input[name="ModelNumber"]').click();
-    await page.locator('input[name="ModelNumber"]').fill("258");
-    await page.locator('input[name="FunctionalLocation"]').click();
-    await page.locator('input[name="FunctionalLocation"]').fill("Noise Room");
+   
+    await page.locator('input[name="ModelNumber"]').fill("MN-"+randomNumber);
+  
     await page.locator('input[name="SerialNumber"]').click();
-    await page.locator('input[name="SerialNumber"]').fill("25886");
+    await page.locator('input[name="SerialNumber"]').fill("SN-"+randomNumber);
 
     await page.locator('select[name="DepartmentId"]').selectOption("34");
     await page.locator(".selectize-input").click();
@@ -88,7 +89,7 @@ test.describe("Create New Test Standard record", () => {
 
     await page.getByRole("link", { name: "Test Specifications" }).click();
 
-    let locString1 = "Asset-Calibration-00" + randomNumber;
+    let locString1 = "TS-Calibration-00" + randomNumber;
     await page.getByRole("textbox").click();
 
     await page.getByRole("textbox").fill(locString1);
