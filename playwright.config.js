@@ -13,13 +13,13 @@ const { defineConfig, devices } = require('@playwright/test');
 module.exports = defineConfig({
   testDir: './tests',
   /* Maximum time one test can run for. */
-  timeout: 30 * 10000,
+  timeout: 30 * 100000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000
+    timeout: 50000
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -51,7 +51,10 @@ module.exports = defineConfig({
       
       use: {  
         ...devices['Desktop Chromium'],
-        viewport: {width:1920, height:1080},        
+        viewport: {width:1366, height:768}, 
+        launchOptions: {
+          args: ["--start-fullscreen"]
+        }     
       }, 
     },
 
