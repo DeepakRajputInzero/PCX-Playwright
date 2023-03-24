@@ -437,7 +437,7 @@ test.describe("Create New Test Standard record", () => {
         '//*[@id="dialog-test-specifications-container"]/div[5]/div[2]/div[2]/div[3]/input'
       )
       .fill("5");
-   await page.pause();
+  //  await page.pause();
     await page.getByTitle("List View").click();
     await page.getByRole("link", { name: "Attachments" }).click();
     await page.getByTitle("Attach File").click();  
