@@ -146,7 +146,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
         '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div[1]/div[4]/select'
       )
       .selectOption("2");
-    await page.pause();
+    
     //Select Unit nm
     await page
       .locator(
@@ -185,7 +185,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await page.click("#search-asset-id");
     await page.locator("#search-asset-id").fill(locString);
     await page.getByRole("button", { name: "Search" }).click();
-    await page.waitForTimeout(1000);
+    // await page.waitForTimeout(1000);
 
     //Select and Edit the searched record
     await page.click(
@@ -206,9 +206,9 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
 
     await page.locator('input[name="Temperature"]').fill("24");
 
-    await page
-      .locator('//*[@id="tab-result-details"]/div[5]/div[3]/div/div[1]')
-      .click();
+    // await page
+    //   .locator('//*[@id="tab-result-details"]/div[5]/div[3]/div/div[1]')
+    //   .click();
     await page.locator('//div[@class="selectize-control dropdown-small single"]/div[1]/div[@class="item" and @data-value="25"]').click();
     await page.locator('input[name="Humidity"]').click();
     await page.locator('input[name="Humidity"]').fill("24");
@@ -232,7 +232,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
    
     await page.getByRole("link", { name: "Test Standards" }).click();
     await page.locator('//*[@id="test-standards-add-button"]').click();
-    // await page.pause();
+    await page.pause();
     await page
       .locator('//*[@id="test-standards-assignment-table"]/tbody/tr[1]/td[1]')
       .click();
