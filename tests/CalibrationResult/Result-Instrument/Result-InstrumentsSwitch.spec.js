@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { assets } from "../../pages/assets.js";
+import { assets } from "../../../pages/assets";
 test.use({viewport:{width:1366, height:728}})
 test.describe("Create New record and update Calibration Result-Switch Test", () => {
   test.beforeEach(async ({ page }) => {

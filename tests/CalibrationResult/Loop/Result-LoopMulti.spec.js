@@ -26,6 +26,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await login.login("deepakr@inzerotech.com", "Deepak@605");
     //After Login Url
     expect(page.url()).toBe("https://pcxstaging.primetechpa.com/Dashboards");
+    
     //Click on New
     await page.getByRole("link", { name: " New" }).click();
     //Click on Instrument link
@@ -368,7 +369,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await page.click("#search-asset-id");
     await page.locator("#search-asset-id").fill(locString);
 
-    await page.getByRole("button", { name: "Search" }).click();
+    await page.getByRole("button", { name: "Search" }).click({timeout:1000});
 
     //Select and Edit the searched record
     await page.getByRole("cell", { name: locString }).click();
@@ -502,11 +503,12 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await page.locator('input[name="Temperature"]').click();
 
     await page.locator('input[name="Temperature"]').fill("24");
-
+await page.pause()
     await page
       .locator('//*[@id="tab-result-details"]/div[5]/div[3]/div/div[1]')
       .click();
-    await page.getByText("°C").nth(3).click({ timeout: 1000 });
+    await page.locator('//div[@id="tab-result-details"]/div[5]/div[3]/div[1]/div[1]/input').click();
+    await page.locator('//div[@id="tab-result-details"]/div[5]/div[3]/div[1]/div[1]/div[1]').click();
     await page.locator('input[name="Humidity"]').click();
     await page.locator('input[name="Humidity"]').fill("24");
     await page
@@ -515,6 +517,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await page
       .locator('//*[@id="tab-result-details"]/div[5]/div[5]/div/div[1]/input')
       .fill("nm");
+    
     await page
       .locator(
         '//*[@id="tab-result-details"]/div[5]/div[5]/div[1]/div[2]/div[1]/div[49]'
@@ -533,7 +536,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
       .fill("2");
     await page.getByRole("button", { name: "Save and Close" }).click();
     expect(await page.locator('span[id="list-view-title"]').textContent()).toEqual("Assets");
-    await page.pause();
+    // await page.pause();
     await page.locator('//*[@class="primary-nav-section body"]/ul[1]/li[3]/a/span').click();
     // expect(await page.locator('#list-view-title').textContent()).toEqual("Results");
     await page.locator('//*[@class="pcx-table-body"]/table/tbody/tr[1]/td[1]').click();
@@ -564,6 +567,10 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
       .fill("2");
     // await page.locator('//*[@id="dialog-test-specification-type-container"]/div[2]/div[1]/div[4]/div[2]/table/tbody/tr/td[8]/input').fill('2');
     await page.getByTitle("NextTestSpec").click();
+    await page.locator('//div[@id="dialog-test-specification-type-container"]/div[2]/div[2]/div[3]/div[2]/table/tbody/tr[1]/td[3]/input').click();
+    await page.locator('//div[@id="dialog-test-specification-type-container"]/div[2]/div[2]/div[3]/div[2]/table/tbody/tr[1]/td[3]/input').fill('10');
+    await page.locator('//div[@id="dialog-test-specification-type-container"]/div[2]/div[2]/div[3]/div[2]/table/tbody/tr[2]/td[3]/input').click();
+    await page.locator('//div[@id="dialog-test-specification-type-container"]/div[2]/div[2]/div[3]/div[2]/table/tbody/tr[2]/td[3]/input').fill('50');
     
     await page
       .locator(
@@ -596,10 +603,11 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
         '//*[@id="dialog-test-specification-type-container"]/div[2]/div[3]/div[3]/div[2]/select'
       )
       .selectOption("2");
-    // await page.getByRole("button", { name: "" }).click();
-    // await page.getByText("Save", { exact: true }).click();
-    // await page.getByTitle("Close").nth(1).click({ delay: 100 });
-    await page.getByRole("button", { name: "Save and Close" }).click({timeout:1000});
+    await page.locator('#dialog-result-test-activity-remarks').click();
+    await page.locator('#dialog-result-test-activity-remarks').fill("Calibrated");
+   
+    await page.getByRole("button", { name: "Save and Close" }).click();
+
     await page.getByRole("cell", { name: locString }).click();
     await page.getByTitle("Edit Result").first().click();
     await page.getByRole("link", { name: "Test Activities" }).click();
