@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { assets } from "../../../../pages/assets.js";
+import { assets } from "../../../pages/assets";
 
 test.describe("Create New record and update Calibration Result_Manual Test", () => {
   test.beforeEach(async ({ page }) => {
@@ -146,7 +146,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
         '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div[1]/div[4]/select'
       )
       .selectOption("2");
-    // await page.pause();
+    await page.pause();
     //Select Unit nm
     await page
       .locator(
@@ -209,7 +209,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await page
       .locator('//*[@id="tab-result-details"]/div[5]/div[3]/div/div[1]')
       .click();
-    await page.getByText("°C").nth(3).click();
+    await page.locator('//div[@class="selectize-control dropdown-small single"]/div[1]/div[@class="item" and @data-value="25"]').click();
     await page.locator('input[name="Humidity"]').click();
     await page.locator('input[name="Humidity"]').fill("24");
     await page
@@ -242,7 +242,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await page.getByRole("button", { name: "Select" }).click();
 
     //Click on Attachment Tab
-    await page.getByRole("link", { name: "Attachments" }).click();
+    await page.getByRole("link", { name: "Attachments" }).click({timeout:100});
     await page.getByTitle("Attach File").click();
 
     // await page.getByText('Import Assets').click();
@@ -263,6 +263,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
 
     await page.getByTitle("Edit Result").first().click();
     await page.getByRole("link", { name: "Test Activities" }).click();
+    await page.pause()
     await page
       .locator(
         'select[name="TestActivity\\.ManualPassFailResults\\.AsFoundResultId"]'
