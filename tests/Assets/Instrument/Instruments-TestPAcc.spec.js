@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { assets } from "../../pages/assets.js";
+import { assets } from "../../../pages/assets";
 
 test.describe("Create New Assets record", () => {
   test.beforeEach(async ({ page }) => {

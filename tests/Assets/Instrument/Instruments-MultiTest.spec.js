@@ -366,12 +366,12 @@ test.describe("Create New Assets record", () => {
     //  await page.waitForTimeout(100);
     //click on list view
     await page.getByTitle("List View").click();
-   
+    
     
     //click on record
     await page.locator('//*[@id="dialog-test-specifications-table"]/tbody[1]/tr[1]/td[1]/span').click();
     //click on edit record
-    await page.getByTitle('Edit Test Specification').click();
+    await page.getByTitle('Edit Test Specification', {waitForTimeout: 100}).click();
     
     await page.locator('//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select').click();
     await page.locator('//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select').selectOption(randomSwitch);

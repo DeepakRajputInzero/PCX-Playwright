@@ -392,53 +392,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
         '//*[@id="dialog-test-specifications-table"]/tbody[1]/tr[1]/td[1]/span'
       )
       .click();
-    //click on edit record
-    // await page.getByTitle("Edit Test Specification").click();
-
-    // await page
-    //   .locator(
-    //     '//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select'
-    //   )
-    //   .click();
-    // await page
-    //   .locator(
-    //     '//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select'
-    //   )
-    //   .selectOption(randomSwitch);
-    // await page
-    //   .locator(
-    //     '//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select'
-    //   )
-    //   .selectOption(randomTPAcc);
-
-    // await page
-    //   .locator(
-    //     '//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select'
-    //   )
-    //   .selectOption(randomManual);
-    // //edit low range
-    // await page
-    //   .locator(
-    //     '//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[2]/input'
-    //   )
-    //   .click();
-    // await page
-    //   .locator(
-    //     '//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[2]/input'
-    //   )
-    //   .fill("20");
-    // //edit the high range
-    // await page
-    //   .locator(
-    //     '//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[3]/input'
-    //   )
-    //   .click();
-    // await page
-    //   .locator(
-    //     '//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[3]/input'
-    //   )
-    //   .fill("100");
-    // await page.getByTitle("List View").click();
+    
     await page
       .locator(
         '//*[@id="dialog-test-specifications-table"]/tbody[1]/tr[1]/td[1]/span'
@@ -596,7 +550,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
    
     // expect(await page.locator('.dialog-title').textContent()).toEqual(" Edit Result");
     // //Maximize window
-    // await page.getByTitle("Maximize").click();
+    await page.getByTitle("Maximize").click();
 
     await page
       .getByRole("link", { name: "Test Activities" })
@@ -668,13 +622,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await page
       .locator('//*[@id="test-standards-add-button"]')
       .click({ delay: 100 });
-    // await page
-    //   .locator('//input[@id="test-standards-search"]')
-    //   .click({ delay: 100 });
-    // await page
-    //   .locator('//input[@id="test-standards-search"]')
-    //   .fill(randomManual);
-    // await page.getByRole("button", { name: "Search" }).click({ delay: 100 });
+    
     await page.locator('//*[@id="test-standards-assignment-table"]/tbody/tr[1]/td[1]')
       .click();
     await page
