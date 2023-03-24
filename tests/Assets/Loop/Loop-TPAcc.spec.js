@@ -27,8 +27,8 @@ test.describe("Create New Loop record", () => {
         //Maximize window
         await page.locator('//body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/i[1]').click();
         //Fill Page Details
-        var minNumber = 100;
-        var maxNumber = 40
+        var minNumber = 40;
+        var maxNumber = 1000;
 
         var randomNumber = randomNumberFromRange(minNumber, maxNumber);
 
@@ -84,24 +84,31 @@ test.describe("Create New Loop record", () => {
         await page.getByText('Dryer').click();
         await page.click('//*[@id="loop-components-instruments-select-button"]');
         await page.getByRole('listitem').filter({ hasText: 'Test Specifications' }).click();
-        // let locString1 = 'Asset-Calibration-' + randomNumber;
-        // await page.locator('#dialog-test-specification-title').click();
-        // await page.locator('#dialog-test-specification-title').fill(locString1);
-        // await page.locator('#dialog-test-specification-type-id').selectOption('3');
-        // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeLow"]').click();
-        // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeLow"]').fill('10');
-        // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeHigh"]').click();
-        // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.RangeHigh"]').fill('50');
-        // await page.locator('select[name="TestSpecification\\.ManualPassFail\\.RangeResolution"]').selectOption('2');
+        
+        let locString1 = 'Asset-Calibration-00' + randomNumber;
+        await page.getByRole('textbox').click();
+        await page.getByRole('textbox').fill(locString1);
+        await page.locator('//div[@class="dialog-test-specification-container"]/div[1]/div[3]/select').selectOption('3');
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[1]/div[1]/select').click();
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[1]/div[1]/select').selectOption('3');
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[3]/div[2]/input').click();
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[3]/div[2]/input').fill('10');
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[3]/div[3]/input').click();
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[3]/div[3]/input').fill('50');
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[3]/div[4]/select').selectOption('2');
        
-        // await page.locator("//*[@id='dialog-test-specification-type-container']/div[1]/div[5]/div/div/input").fill('nm');
-        // await page.locator("//*[@id='dialog-test-specification-type-container']/div[1]/div[5]/div/div[2]/div/div[49]").click();
-        // await page.locator('select[name="TestSpecification\\.ManualPassFail\\.ToleranceTypeId"]').selectOption('2');
-        // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.Tolerance"]').click();
-        // await page.locator('input[name="TestSpecification\\.ManualPassFail\\.Tolerance"]').fill('5');
-        await page.getByRole('button', { name: 'Save and Close' }).click();
+        await page.locator("//div[@class='dialog-test-specification-container']/div[2]/div[3]/div[5]/div[1]/div[1]/input").fill('nm');
+        await page.locator("//div[@class='dialog-test-specification-container']/div[2]/div[3]/div[5]/div[1]/div[2]/div[1]/div[49]").click();
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[5]/div[2]/select').selectOption('2');
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[5]/div[3]/input').click();
+        await page.locator('//div[@class="dialog-test-specification-type-container"]/div[5]/div[3]/input').fill('5');
+        await page.getByRole("button", { name: "Save and Close" }).click();
+
         await page.locator(".avatar-initials").click();
-        await page.locator("//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]").click();
-        await page.waitForTimeout(100);
+        await page
+        .locator(
+        "//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]"
+        )
+        .click();
       });
 });

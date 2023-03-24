@@ -399,7 +399,7 @@ test.describe("Create New Assets record", () => {
       .fill(randomID);
    await page
       .locator(
-        '//*[@id="dialog-test-specifications-container"]/div[5]/div[1]/div[3]/select'
+        '//*[@class="dialog-test-specification-container"]/div[1]/div[3]/select'
       ).selectOption('1');
       await page
       .locator(
