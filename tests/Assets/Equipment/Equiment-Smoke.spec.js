@@ -40,7 +40,7 @@ test.describe("Create New Multi Test Spec Equipment record", () => {
     await page.locator("#dialog-asset-id").click();
     await page.locator("#dialog-asset-id").fill(locString);
     await page.locator("#dialog-asset-name").click();
-    // await page.pause();
+    
     await page.locator("#dialog-asset-name").fill("Instrument Calibration");
      //Fill Manufacturer
     await page.locator("#dialog-asset-manufacturer").click();   
@@ -70,7 +70,24 @@ test.describe("Create New Multi Test Spec Equipment record", () => {
     //Fill Remarks
     await page.getByText("Remarks").click();
     await page.locator("#dialog-asset-remarks").fill("Multi Test spec Calibration");
-    
+    // await page.pause();
+    // await page.getByRole('listitem').filter({ hasText: 'Uncertainty' }).click();
+    // await page.getByTitle('Add Component').click();
+    // await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[1]/input[1]').click();
+    // await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[1]/input[1]').fill('Component-'+randomNumber);
+    // await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[3]/div[1]/input').click();
+    // await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[3]/div[1]/input').fill('2');
+    // await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[8]/select').click();
+    // await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[8]/select').selectOption('49');
+    await page.getByRole("button", { name: "Save and Close" }).click();
+
+    await page.getByTitle('Add Component').click();
+    await page.locator('input[name="UncertaintyComponents\\[b36018ba-10d7-4e1c-a42c-15b27f8ee571\\]\\.Name"]').click();
+    await page.locator('input[name="UncertaintyComponents\\[b36018ba-10d7-4e1c-a42c-15b27f8ee571\\]\\.Name"]').fill('Component-1'+randomNumber);
+    await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[3]/div[1]/input').click();
+    await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[3]/div[1]/input').fill('1');
+    await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[8]/select').click();
+    await page.locator('//*[@class="dialog-uncertainty-table-row selected"]/td[8]/select').selectOption('48');
     await page.getByRole("button", { name: "Save and Close" }).click();
     //Click on Asset Tab
     await page.getByRole("link", { name: " Assets" }).click();

@@ -113,7 +113,7 @@ test.describe("Create New Assets record", () => {
         '//*[@id="dialog-test-specifications-container"]/div[2]/div[1]/div[3]/select'
       )
       .selectOption("1");
-      
+
     //Fill Low Range
     await page
       .locator(
@@ -238,7 +238,6 @@ test.describe("Create New Assets record", () => {
       )
       .selectOption("2");
 
-    
     await page
       .locator(
         '//*[@id="dialog-test-specifications-container"]/div[3]/div[2]/div[3]/div[5]/div[1]/div[1]/input'
@@ -265,10 +264,22 @@ test.describe("Create New Assets record", () => {
       )
       .selectOption("2");
     //Add New Test Point Accuracy
-    await page.getByTitle('List View').click();
-    await page.locator('//*[@id="dialog-test-specification-list"]/div[1]/div[1]/div[2]/i[1]').click();
-    await page.locator('//*[@id="dialog-test-specifications-container"]/div[4]/div[1]/div[2]/input').click();
-    await page.locator('//*[@id="dialog-test-specifications-container"]/div[4]/div[1]/div[2]/input').fill(randomTPAcc);
+    await page.getByTitle("List View").click();
+    await page
+      .locator(
+        '//*[@id="dialog-test-specification-list"]/div[1]/div[1]/div[2]/i[1]'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[4]/div[1]/div[2]/input'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[4]/div[1]/div[2]/input'
+      )
+      .fill(randomTPAcc);
 
     //Select type as Test Point Accuracy
     await page
@@ -299,7 +310,7 @@ test.describe("Create New Assets record", () => {
         '//*[@id="dialog-test-specifications-container"]/div[4]/div[2]/div[3]/div[2]/input'
       )
       .fill("10");
-        
+
     //Fill High Range
     await page
       .locator(
@@ -317,7 +328,7 @@ test.describe("Create New Assets record", () => {
         '//*[@id="dialog-test-specifications-container"]/div[4]/div[2]/div[3]/div[4]/select'
       )
       .selectOption("2");
-    
+
     // Select Unit
     await page
       .locator(
@@ -340,9 +351,102 @@ test.describe("Create New Assets record", () => {
         '//*[@id="dialog-test-specifications-container"]/div[4]/div[2]/div[5]/div[3]/input'
       )
       .fill("5");
-    
+    // await page.pause();
     //Save record
-
+    await page.getByRole("link", { name: "Uncertainty" }).click();
+    // await page.pause()
+    await page.waitForTimeout(1000);
+    await page.getByTitle("Add Component").click();
+    //  await page.waitForTimeout(1000);
+    // await page.getByTitle('Add Component').click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[1]/div[1]/input'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[1]/div[1]/input'
+      )
+      .fill("Com-" + randomNumber);
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[3]/div[1]/input'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[3]/div[1]/input'
+      )
+      .fill("2");
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[4]/select'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[4]/select'
+      )
+      .selectOption("10");
+    // await page.locator('//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[7]/input').click();
+    // await page.locator('//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[7]/input').fill('1');
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[8]/select'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[8]/select'
+      )
+      .selectOption("49");
+    await page.getByTitle("Add Component").click();
+    //  await page.waitForTimeout(1000);
+    // await page.getByTitle('Add Component').click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]/td[1]/div[1]/input'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]/td[1]/div[1]/input'
+      )
+      .fill("Com1-" + randomNumber);
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]/td[3]/div[1]/input'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]/td[3]/div[1]/input'
+      )
+      .fill("1");
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]/td[4]/select'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]/td[4]/select'
+      )
+      .selectOption("10");
+    // await page.locator('//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[7]/input').click();
+    // await page.locator('//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[2]/td[7]/input').fill('1');
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]/td[8]/select'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]/td[8]/select'
+      )
+      .selectOption("48");
+    // await page.getByRole("button", { name: "Save and Close" }).click();
     await page.getByRole("button", { name: "Save and Close" }).click();
 
     //Click on Asset Tab
@@ -354,9 +458,9 @@ test.describe("Create New Assets record", () => {
     await page.locator("#search-asset-id").fill(locString);
     await page.waitForTimeout(100);
     await page.getByRole("button", { name: "Search" }).click();
-    
+
     //Select and Edit the searched record
-    await page.getByRole('cell', { name: locString }).click();
+    await page.getByRole("cell", { name: locString }).click();
     await page.getByTitle("Edit Asset").first().click();
     // await page.pause();
     //Maximize window
@@ -366,42 +470,84 @@ test.describe("Create New Assets record", () => {
     //  await page.waitForTimeout(100);
     //click on list view
     await page.getByTitle("List View").click();
-    
-    
+
     //click on record
-    await page.locator('//*[@id="dialog-test-specifications-table"]/tbody[1]/tr[1]/td[1]/span').click();
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-table"]/tbody[1]/tr[1]/td[1]/span'
+      )
+      .click();
     //click on edit record
-    await page.getByTitle('Edit Test Specification', {waitForTimeout: 100}).click();
-    
-    await page.locator('//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select').click();
-    await page.locator('//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select').selectOption(randomSwitch);
-    await page.locator('//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select').selectOption(randomTPAcc);
+    await page
+      .getByTitle("Edit Test Specification", { waitForTimeout: 100 })
+      .click();
 
-    await page.locator('//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select').selectOption(randomManual);
+    await page
+      .locator(
+        '//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select'
+      )
+      .selectOption(randomSwitch);
+    await page
+      .locator(
+        '//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select'
+      )
+      .selectOption(randomTPAcc);
+
+    await page
+      .locator(
+        '//*[@id="tab-asset-test-specifications"]/div[2]/div[1]/div/div[1]/select'
+      )
+      .selectOption(randomManual);
     //edit low range
-    await page.locator('//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[2]/input').click();
-    await page.locator('//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[2]/input').fill('20');
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[2]/input'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[2]/input'
+      )
+      .fill("20");
     //edit the high range
-    await page.locator('//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[3]/input').click();
-    await page.locator('//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[3]/input').fill('100');
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[3]/input'
+      )
+      .click();
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[1]/div[2]/div[1]/div[3]/input'
+      )
+      .fill("100");
     await page.getByTitle("List View").click();
-    await page.locator('//*[@id="dialog-test-specifications-table"]/tbody[1]/tr[1]/td[1]/span').click();
-    await page.getByTitle('Delete Test Specification').click();
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-table"]/tbody[1]/tr[1]/td[1]/span'
+      )
+      .click();
+    await page.getByTitle("Delete Test Specification").click();
 
-    await page.getByRole('button', { name: 'Delete' }).click();
- 
-    await page.locator('#dialog-test-specification-list-add-button').click();
+    await page.getByRole("button", { name: "Delete" }).click();
+
+    await page.locator("#dialog-test-specification-list-add-button").click();
 
     await page
       .locator(
         '//*[@id="tab-asset-test-specifications"]/div[2]/div[2]/div[5]/div[1]/div[2]/input'
       )
       .fill(randomID);
-   await page
+    await page
       .locator(
         '//*[@class="dialog-test-specification-container"]/div[1]/div[3]/select'
-      ).selectOption('1');
-      await page
+      )
+      .selectOption("1");
+    await page
       .locator(
         '//*[@id="dialog-test-specifications-container"]/div[5]/div[2]/div[1]/div[2]/input'
       )
@@ -425,7 +571,7 @@ test.describe("Create New Assets record", () => {
       .fill("50");
     // await page.pause();
     //select Resolution
-      await page
+    await page
       .locator(
         '//*[@id="dialog-test-specifications-container"]/div[5]/div[2]/div[1]/div[4]/select'
       )
@@ -437,20 +583,19 @@ test.describe("Create New Assets record", () => {
         '//*[@id="dialog-test-specifications-container"]/div[5]/div[2]/div[1]/div[5]/div[1]/div[1]/input'
       )
       .fill("nm");
-    // await page.pause();
-   
+
     await page
       .locator(
         '//*[@id="dialog-test-specifications-container"]/div[5]/div[2]/div[1]/div[5]/div[1]/div[2]/div[1]/div[49]'
       )
       .click();
- //Select Tolerance
+    //Select Tolerance
     await page
       .locator(
         '//*[@id="dialog-test-specifications-container"]/div[5]/div[2]/div[2]/div[2]/select'
       )
       .selectOption("2");
-   //Fill Tolerance
+    //Fill Tolerance
     await page
       .locator(
         '//*[@id="dialog-test-specifications-container"]/div[5]/div[2]/div[2]/div[3]/input'
@@ -461,19 +606,31 @@ test.describe("Create New Assets record", () => {
         '//*[@id="dialog-test-specifications-container"]/div[5]/div[2]/div[2]/div[3]/input'
       )
       .fill("5");
-   
+
     await page.getByTitle("List View").click();
     await page.getByRole("link", { name: "Attachments" }).click();
-    await page.getByTitle("Attach File").click();  
-    const filepath0 = "./fixture/file/AssetsImport.xlsx";  
+    await page.getByTitle("Attach File").click();
+    const filepath0 = "./fixture/file/AssetsImport.xlsx";
     await page.setInputFiles("#selected-file", filepath0);
     await page.getByRole("button", { name: "Upload" }).click();
-    await page.getByRole('link', { name: 'Details' }).click();
-    await page.getByRole("button", { name: "Save and Close" }).click();
-    // Sign Out from Application
-    await page.waitForTimeout(100);
-    await page.locator(".avatar-initials").click();
+    await page.getByRole("link", { name: "Uncertainty" }).click();
 
-    await page.getByText("Sign Out").click();
+    await page.waitForTimeout(1000);
+
+    await page
+      .locator(
+        '//*[@class="pcx-tab-content"]/div[4]/div[1]/div[2]/table[1]/tbody/tr[3]'
+      )
+      .click();
+    await page.getByTitle("Delete Component").click();
+    await page.getByRole("button", { name: "Delete" }).click();
+    await page
+      .getByRole("button", { name: "Save and Close" }, { waitForTimeout: 1000 })
+      .click();
+    await page
+      .locator('//*[@class="pcx-dropdown-menu-container"]/div[1]/div[1]/div[1]')
+      .click();
+    // Sign Out from Application
+    await page.locator('li[data-pcx-action="user-sign-out"]').click();
   });
 });
