@@ -613,6 +613,7 @@ test.describe("Create New Assets record", () => {
     const filepath0 = "./fixture/file/AssetsImport.xlsx";
     await page.setInputFiles("#selected-file", filepath0);
     await page.getByRole("button", { name: "Upload" }).click();
+    //Add Uncertainty
     await page.getByRole("link", { name: "Uncertainty" }).click();
 
     await page.waitForTimeout(1000);
