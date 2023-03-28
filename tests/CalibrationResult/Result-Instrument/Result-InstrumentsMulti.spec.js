@@ -35,7 +35,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
       .click();
     //Fill Page Details
     //Random Number Genrater
-    var minNumber = 10;
+    var minNumber = 40;
     var maxNumber = 1000;
     var randomNumber = randomNumberFromRange(minNumber, maxNumber);
 
@@ -103,7 +103,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
       .filter({ hasText: "Test Specifications" })
       .click();
     //Genrate Asset Id
-    let random = "Asset-Calibration-" + randomNumber;
+    let random = "Asset-Calibration-00" + randomNumber;
     await page.getByText("Test Specifications").click();
     //Fill Title
     await page
@@ -232,7 +232,7 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
    
     await page.getByRole("link", { name: "Test Standards" }).click();
     await page.locator('//*[@id="test-standards-add-button"]').click();
-    await page.pause();
+    // await page.pause();
     await page
       .locator('//*[@id="test-standards-assignment-table"]/tbody/tr[1]/td[1]')
       .click();
@@ -242,8 +242,9 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
     await page.getByRole("button", { name: "Select" }).click();
 
     //Click on Attachment Tab
-    await page.getByRole("link", { name: "Attachments" }).click({timeout:100});
-    await page.getByTitle("Attach File").click();
+    await page.getByRole('link', { name: 'Attachments' }).click();
+    // await page.locator('//div[@class="dialog-content"]/div[1]/div[2]/ul[1]/li[3]/a').click();
+    await page.getByTitle('Attach File').click();
 
     // await page.getByText('Import Assets').click();
     await page.setInputFiles("#selected-file", filepath0);
@@ -263,15 +264,25 @@ test.describe("Create New record and update Calibration Result_Manual Test", () 
 
     await page.getByTitle("Edit Result").first().click();
     await page.getByRole("link", { name: "Test Activities" }).click();
-    await page.pause()
+    // await page.pause()
     await page
       .locator(
-        'select[name="TestActivity\\.ManualPassFailResults\\.AsFoundResultId"]'
+        '//div[@class="test-activity-content"]/div[1]/div[2]/div[2]/select'
+      )
+      .click();
+    await page
+      .locator(
+        '//div[@class="test-activity-content"]/div[1]/div[2]/div[2]/select'
       )
       .selectOption("2");
+      await page
+      .locator(
+        '//div[@class="test-activity-content"]/div[1]/div[3]/div[2]/select'
+      )
+      .click();
     await page
       .locator(
-        'select[name="TestActivity\\.ManualPassFailResults\\.AsLeftResultId"]'
+        '//div[@class="test-activity-content"]/div[1]/div[3]/div[2]/select'
       )
       .selectOption("2");
     await page.locator("#dialog-result-test-activity-remarks").click();
