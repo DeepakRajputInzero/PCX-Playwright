@@ -192,14 +192,16 @@ test.describe("Create New Instruments record", () => {
       )
       .selectOption("2");
 
-    await page.getByRole("button", { name: "Save and Close" }).click({timeout:100});
+    // await page.getByRole("button", { name: "Save and Close" }).click({timeout:100});
 
-    await page.locator(".avatar-initials").click();
     await page
-      .locator(
-        "//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]"
-      )
-      .click();
+    .getByRole("button", { name: "Save and Close" }, { waitForTimeout: 1000 })
+    .click();
+  await page
+    .locator('//*[@class="pcx-dropdown-menu-container"]/div[1]/div[1]/div[1]')
+    .click();
+  // Sign Out from Application
+  await page.locator('li[data-pcx-action="user-sign-out"]').click();
  
   });
 });
