@@ -25,8 +25,8 @@ test.describe("Create New Asset record", () => {
         await page.getByText('Equipment').click();
         await page.locator('//body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/i[1]').click();
         //Fill Page Details
-        var minNumber = 100;
-        var maxNumber = 40
+        var minNumber = 30;
+        var maxNumber = 1000;
 
         var randomNumber = randomNumberFromRange(minNumber, maxNumber);
 

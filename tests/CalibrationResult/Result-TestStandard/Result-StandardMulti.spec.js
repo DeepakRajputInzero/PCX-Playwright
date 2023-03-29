@@ -26,7 +26,7 @@ test.describe("Create New Test Standard record and update Calibration Result_Man
     expect(page.url()).toBe("https://pcxstaging.primetechpa.com/Dashboards");
     //Click on New
     await page.getByRole("link", { name: " New" }).click();
-    await page.pause();
+    // await page.pause();
     //Click on Instrument link
     await page.getByText('Test Standard').click();
 
