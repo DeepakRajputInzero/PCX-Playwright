@@ -1,7 +1,7 @@
 exports.loginPage = class loginPage{
 
     constructor(page){
-        this.page = page
+        this.page = page;
         this.username_textbox = page.$("input[name='Email']");
         this.password_textbox = page.$("input[name='Password']");
         this.login_button = page.$("//*[@id='login-button']");
