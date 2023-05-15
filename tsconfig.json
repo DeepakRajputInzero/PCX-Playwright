@@ -1,8 +1,12 @@
 {
     "compilerOptions": {
-        "target": "es6",
-        "strict": true,
-        "module": "commonjs",
-        "sourceMap": true
+        "esModuleInterop": true,
+        "baseUrl": ".",
+        "paths": {
+            "@page/*": ["pageFactory/pageRepository/*"],
+            "@objects/*": ["pageFactory/objectRepository"],
+            "@lib/*": ["lib/*"],
+        },
+      
     }
 }

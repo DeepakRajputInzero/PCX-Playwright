@@ -4,11 +4,13 @@ import { assets } from "../../pages/assets";
 test.describe("Create Index record", () =>{
 
     test.beforeEach(async({page}) => {
+        
         //Application URL
         await page.goto("https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F")
     });
     test.afterEach(async({page})=> {
         await page.close();
+        
       
     });
 
@@ -25,7 +27,7 @@ test.describe("Create Index record", () =>{
         await expect(page.locator(".selected-filter-name")).toHaveText("Reports");
         await page.locator('//*[@id="manufacturers-table"]/tbody/tr[1]/td[2]/a').click();
         await page.locator("//b[normalize-space()='Run Report']").click();
-        await page.waitForTimeout(8000);
+        await page.waitForTimeout(5000);
     
        expect(page.url()).toContain("https://pcxstaging.primetechpa.com/Reports/ItemsDue");
        
@@ -40,13 +42,14 @@ test.describe("Create Index record", () =>{
     function randomNumberFromRange(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
+    
     let locString = "Instrument-Id-00" + randomNumber;
     let locString1 = "Instrument-Id-00" + randomNumber;
         await page.locator("//span[normalize-space()='Calibration Certificate']").click();
         await page.locator("//input[@id='Assets']").click();
         await page.locator("//input[@id='Assets']").fill(locString);
         await page.locator("//b[normalize-space()='Run Report']").click();
-        await page.waitForTimeout(8000);
+        await page.waitForTimeout(5000);
         expect(page.url()).toContain("https://pcxstaging.primetechpa.com/Reports/CalibrationCertificate");
        
         await page.bringToFront();
@@ -54,9 +57,31 @@ test.describe("Create Index record", () =>{
         await page.locator("//input[@id='Assets']").click();
         await page.locator("//input[@id='Assets']").fill(locString1);
         await page.locator("//b[normalize-space()='Run Report']").click();
-        // await page.waitForTimeout(8000);
-        // expect(page.url()).toContain("https://pcxstaging.primetechpa.com/Reports/CalibrationCertificate");       
-        // await page.bringToFront();
-
+        // await page.on("dialog", (dialog)=>{
+        //     console.log('Message: '+ dialog.message());
+        //     dialog.accept();
+        // })
+        await page.locator("//button[@type='button']").click();
+        await page.locator("//span[normalize-space()='Reverse Traceability']").click();
+        await page.locator("//input[@id='TestStandards']").click();
+        // await page.pause()
+        await page.locator("//input[@id='TestStandards']").fill(locString);
+        await page.locator("//b[normalize-space()='Run Report']").click();
+        await page.waitForTimeout(4000);
+        expect(page.url()).toContain("https://pcxstaging.primetechpa.com/Reports/ReverseTraceability");
+        await page.bringToFront();
+        await page.locator("//span[normalize-space()='Work History']").click();
+        await page.locator("//input[@id='Assets']").click();
+        await page.locator("//input[@id='Assets']").fill(locString1);
+        await page.locator("//b[normalize-space()='Run Report']").click();
+        await page.waitForTimeout(4000);
+        expect(page.url()).toContain("https://pcxstaging.primetechpa.com/Reports/WorkHistory");
+        await page.bringToFront();
+        await page.locator("//span[normalize-space()='Reports']").click();
+        // await page.locator("//div[@class='avatar-initials']", {waitForTimeout:1000}).click();
+        // // await page.waitForTimeout(100);
+        // await page.locator("//li[@data-pcx-action='user-sign-out']",{waitForTimeout:1000}).click();
+        // // await page.waitForTimeout(1000)
+        // expect(page.url()).toContain("https://pcxstaging.primetechpa.com/Identity/Login");
     })
 });
