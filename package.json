@@ -2,7 +2,7 @@
   "name": "pcx-primetech-calibration",
   "version": "1.0.0",
   "description": "PCX-PrimeTech",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {},
   "keywords": [],
   "author": "Deepak R",
