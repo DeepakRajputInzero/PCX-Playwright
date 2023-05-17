@@ -120,7 +120,77 @@ export default class InstrumentMulti {
     await this.page.locator(this.REMARKS).type(rem);
   }
     
+  async clickOnTestSpecification() {
+    await this.page.click("text=Test Specifications");
+  }
+
+  async fillTitle(title: string) {
+    await this.page.locator('//*[@id="dialog-test-specifications-container"]/div[2]/div[1]/div[2]/input').type(title);
+  }
    
+  async selectManualTest() {
+    await this.page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[2]/div[1]/div[3]/select'
+      )
+      .selectOption("1");
+  }
+
+  async fillLowRange(lowrange: string) {
+    await this.page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div/div[2]/input'
+      )
+      .fill(lowrange);
+  }
+
+  async fillHighRange(highrange:string) {
+    await this.page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"][@id="dialog-test-specifications-container"]/div[2]/div[2]/div[1]/div[3]/input'
+      )
+      .fill(highrange);
+  }
+
+  async selectResolution(option: string) {
+    await this.page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div[1]/div[4]/select'
+      )
+      .selectOption(option);
+  }
+
+  async selectUnit(unit: string) {
+    await this.page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div[1]/div[5]/div/div[1]/input'
+      )
+      .fill(unit);
+  }
+
+  async selectTolrence(tol: string) {
+    await this.page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div[2]/div[2]/select'
+      )
+      .selectOption(tol);
+  }
+
+  async fillTolrence(tol: string) {
+    await this.page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div[2]/div[3]/input'
+      )
+      .fill(tol);
+  }
+
+  async clickOnSave() {
+    await this.page
+        .getByRole("button", { name: "Save and Close" })
+        .click();
+  }
+
+
   
 }
 //         //random value input in Asset ID
@@ -184,3 +254,4 @@ export default class InstrumentMulti {
 //     // }
     
 // }
+

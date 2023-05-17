@@ -32,7 +32,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    headless: true,
+    headless: false,
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
   
@@ -43,6 +43,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     video: 'on'
   },
+  
 
   /* Configure projects for major browsers */
   projects: [
@@ -90,4 +91,5 @@ export default defineConfig({
   //   command: 'npm run start',
   //   port: 3000,
   // },
+  globalSetup: "utils/globalSetup.ts"
 });
