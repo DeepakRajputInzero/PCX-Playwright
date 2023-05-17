@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "description": "PCX-PrimeTech",
   "main": "index.ts",
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "env:qa": "cross-env test_env=qa npx playwright test"
+  },
   "keywords": [],
   "author": "Deepak R",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.31.1"
+    "@playwright/test": "^1.31.1",
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
     "faker": "^6.6.6",
     "playwright-core": "^1.31.1",
     "source-map-loader": "^4.0.1",
