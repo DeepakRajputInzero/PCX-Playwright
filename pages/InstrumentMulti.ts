@@ -7,7 +7,7 @@ export default class InstrumentMulti {
   NEW_BTN = "li.nav-new>a";
   INSTRUMENT_BTN = "ul.new-dropdown-menu>li:nth-child(2)";
   MAX_WINDOW = ".dialog-toggle-maximize";
-  ASSET_ID = "#dialog-asset-id";
+  INSTRUMENT_ID = "#dialog-asset-id";
   ASSET_NAME = "#dialog-asset-name";
   MANUFEC_NAME = '#dialog-asset-manufacturer';
   PHYSICAL_LOC = "select[name='PhysicalLocationId']";
@@ -27,8 +27,9 @@ export default class InstrumentMulti {
   minNumber = 40;
   maxNumber = 10000;
   randomNumber= Math.floor(Math.random() * (this.maxNumber - this.minNumber + 1) + this.minNumber);
-  locString = "Instrument-Id-00" + this.randomNumber;
-
+  instrumentId = "Instrument-Id-00" + this.randomNumber;
+  switchId = "Instrument-Id-00" + this.randomNumber;
+  tstandardId = "TestAP-Id-00" + this.randomNumber;
   //Genrate Asset Id
   randomManual = "TestSpec-Manual-00" + this.randomNumber;
   randomSwitch = "TestSpec-Switch-00" + this.randomNumber;
@@ -48,8 +49,16 @@ export default class InstrumentMulti {
     await this.page.locator(this.MAX_WINDOW).click();
   }
 
-  async fillAssetId() {
-    await this.page.locator(this.ASSET_ID).fill(this.locString);
+  async fillManualAssetId() {
+    await this.page.locator(this.INSTRUMENT_ID).fill(this.instrumentId);
+  }
+
+  async fillSwicthAssetId() {
+    await this.page.locator(this.INSTRUMENT_ID).fill(this.switchId);
+  }
+
+  async fillTStandardId() {
+    await this.page.locator(this.INSTRUMENT_ID).fill(this.tstandardId);
   }
 
   async fillInstrumentsName(InsName: string) {
@@ -125,15 +134,18 @@ export default class InstrumentMulti {
   }
 
   async fillTitle(title: string) {
-    await this.page.locator('//*[@id="dialog-test-specifications-container"]/div[2]/div[1]/div[2]/input').type(title);
+    await this.page.locator
+      (
+        "(//input[@class='dialog-test-specification-title'])[2]"
+      ).type(title);
   }
-   
-  async selectManualTest() {
+   //Select type on test specification
+  async selectTypeTest(type: string) {
     await this.page
       .locator(
         '//*[@id="dialog-test-specifications-container"]/div[2]/div[1]/div[3]/select'
       )
-      .selectOption("1");
+      .selectOption(type);
   }
 
   async fillLowRange(lowrange: string) {
@@ -190,68 +202,50 @@ export default class InstrumentMulti {
         .click();
   }
 
+  async selectTripDetection(option: string) {
+    //Select Trip Detection Method
+    await this.page
+      .locator(
+        '.dialog-trip-detection-method-id'
+      )
+      .selectOption(option);
+  }
 
+  async fillSetTolerence(option: string) {
+    
+    await this.page
+      .locator(
+        "(//label[text()='Set Point Tolerance']/following::input)[1]"
+      )
+      .fill(option);
+  }
+
+  async fillSwitchLowRange(option: string) {
+    await this.page
+      .locator(
+        "(//label[text()='Low']/following::input)[1]"
+      )
+      .fill(option);
+  }
+
+  async fillSwitchHighRange(option: string) {
+    await this.page
+      .locator(
+        "(//label[text()='High']/following::input)[1]"
+      )
+      .fill(option);
+  }
+
+  async selectSwitchResolution(reso: string) {
+    await this.page.locator("//label[text()='Resolution']/following-sibling::select").selectOption(reso)
+  }
+
+  async selectSwicthUnit() {
+    await this.page.locator("(//div[contains(@class,'selectize-input items')])[3]")
+  }
+
+  async snapshotTest() {
+
+}
   
 }
-//         //random value input in Asset ID
-//         await page.locator(this.assetId).click();
-//         await page.locator(this.assetId).fill(locString);
-//         await page.locator("#dialog-asset-name").click();
-//         // Fill Description
-//         await page.locator("#dialog-asset-name").fill("Instrument Calibration");
-//         await page.locator("#dialog-asset-manufacturer").click();
-//         //Fill Manufacturer
-//         await page.locator("#dialog-asset-manufacturer").fill("fluke");
-//         await page.locator("#ui-id-3").click();
-//         // Select Physical Location
-//         await page.locator("select[name='PhysicalLocationId']").selectOption("51");
-//         // Fill Model Number
-//         await page.locator('input[name="ModelNumber"]').click();
-//         await page.locator('input[name="ModelNumber"]').fill("258");
-//         //Select functional Location
-//         await page.locator('input[name="FunctionalLocation"]').click();
-//         await page.locator('input[name="FunctionalLocation"]').fill("Noise Room");
-//         //Fill Serial Number
-//         await page.locator('input[name="SerialNumber"]').click();
-//         await page.locator('input[name="SerialNumber"]').fill("25886");
-//         //Select Department ID
-//         await page.locator('select[name="DepartmentId"]').selectOption("34");
-//         await page.locator(".selectize-input").click();
-//         // Select Classification multiple
-//         await page.getByText("Classification 1").click();
-//         await page.getByText("Critical", { exact: true }).click();
-    
-//         await page
-//           .locator('//*[@id="tab-asset-details"]/div[3]/div[3]/select')
-//           .selectOption("3");
-    
-//         // Date pic
-//         await page.click(
-//           '//*[@id="tab-asset-details"][@id="tab-asset-details"]/div[3]/div[2]/div/span/i'
-//         );
-//         const mmYY = page.locator(
-//           '//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/div'
-//         );
-//         const prev = page.locator(
-//           '//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/a[1]'
-//         );
-//         const next = page.locator(
-//           '//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/a[2]'
-//         );
-//         await next.click();
-//         await page.click(
-//           '//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/table/tbody/tr[4]/td[6]/a'
-//         );
-//         //Fill Remarks
-//         await page.locator("#dialog-asset-remarks").click();
-//         await page.locator("#dialog-asset-remarks").fill("Calibration");
-//     }
-    
-//     // async login(username, password){
-//     //     await this.username_textbox.fill(username);
-//     //     await this.password_textbox.fill(password);
-//     //     await this.login_button.click();
-//     // }
-    
-// }
-

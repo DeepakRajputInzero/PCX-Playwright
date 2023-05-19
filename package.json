@@ -2,9 +2,10 @@
   "name": "pcx-primetech-calibration",
   "version": "1.0.0",
   "description": "PCX-PrimeTech",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "test:api": "playwright test --config=api.config.ts",
     "env:qa": "cross-env test_env=qa npx playwright test"
   },
   "keywords": [],
