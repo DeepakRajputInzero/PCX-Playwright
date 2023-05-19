@@ -29,7 +29,7 @@ const data ={
     //Maximize window
     await instruments.maximizeWindow();
     //Fill Page Details 
-    await instruments.fillAssetId();        
+    await instruments.fillManualAssetId();        
     // Fill Description
     await instruments.fillInstrumentsName("Instruments Calibration");
     //Fill Manufacturer
@@ -68,7 +68,7 @@ const data ={
     await instruments
       .fillTitle(instruments.randomManual);
     //Select type as Manual Test
-    await instruments.selectManualTest();
+    await instruments.selectTypeTest("1");
 
     //Fill Low Range
     await instruments.fillLowRange("10");
@@ -92,6 +92,8 @@ const data ={
       )
       .click();
     await instruments.fillTolrence("5");
+
+    // expect(await page.screenshot()).toMatchSnapshot("Instruments.png");
     //Add New Switch Test
   //   await page.getByTitle("Add Test Specification").nth(3).click();
   //   await page.waitForLoadState();
