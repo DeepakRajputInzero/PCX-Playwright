@@ -240,8 +240,27 @@ export default class InstrumentMulti {
     await this.page.locator("//label[text()='Resolution']/following-sibling::select").selectOption(reso)
   }
 
+  
+
   async selectSwicthUnit() {
-    await this.page.locator("(//div[contains(@class,'selectize-input items')])[3]")
+    await this.page.locator("(//div[contains(@class,'selectize-input items')])[3]").click();
+    await this.page.locator("text=nm").click();
+  }
+
+  async fillSetPoint(setpoint:string) {
+    await this.page.locator("(//input[@class='dialog-set-points-table-value'])[1]").fill(setpoint);
+  }
+  
+  async selectDirection(option:string) {
+    await this.page.locator("(//select[@class='dialog-set-points-table-direction-id'])[1]").selectOption(option);
+  }
+
+  async selectTripState(option:string) {
+    await this.page.locator("(//select[@class='dialog-set-points-table-trip-state-id'])[1]").selectOption(option);
+  }
+
+  async saveAndClose() {
+    await this.page.locator("(//button[contains(@class,'pcx-button button-primary')])[1]").click();
   }
 
   async snapshotTest() {

@@ -74,12 +74,22 @@ import InstrumentMulti from '../../../pages/InstrumentMulti';
     await instruments.fillSwitchLowRange("10");
 
     //fill high range
-    await instruments.fillHighRange("50");
+    await instruments.fillSwitchHighRange("50");
 
     // Select resolution
     await instruments.selectSwitchResolution("2");
+    //select Unit
+    await instruments.selectSwicthUnit();
 
+    //set point
+    await instruments.fillSetPoint("1");
 
+    await instruments.selectDirection("1");
+
+    //select trip
+    await instruments.selectTripState("1");
+
+    await instruments.saveAndClose();
     //Select Unit nm
     // await instruments.selectUnit("nm");
     // // await page.pause();
