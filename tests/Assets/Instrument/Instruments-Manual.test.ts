@@ -86,30 +86,41 @@ const data ={
     
     await instruments.selectTolrence("2")
     //Fill Tolerance Field
-   
+    await page
+      .locator(
+        '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div[2]/div[3]/input'
+      )
+      .click();
     await instruments.fillTolrence("5");
 
     await instruments.saveAndClose();
 
     // expect(await page.screenshot()).toMatchSnapshot("Instruments.png");
-    await instruments.clickOnModule("Assets");
-    //click on search box
-    await instruments.clickOnSearchBox();
-    //fill search id
-    await instruments.fillSearchManualAssetId();
-    //select created record
-    await instruments.selectSearchRecord();
-    //Edit the selected record
-    await instruments.selectedOperation("Edit Asset");
-    // Maximize window
-    await instruments.maximizeWindow();
-    //Select title on edit record
-    await instruments.selectEditRecordNav("Test Specifications");
-    //Click on New Test Spec button
-    await instruments.clickOnTestSpecNew();
-    // await instruments.fillSwitchRecord();
-    // await page.pause()
-    
+    //Add New Switch Test
+  //   await page.getByTitle("Add Test Specification").nth(3).click();
+  //   await page.waitForLoadState();
+  //   await page
+  //     .locator(
+  //       '//*[@id="dialog-test-specifications-container"]/div[3]/div[1]/div[2]/input[1]'
+  //     )
+  //     .fill(instruments.randomSwitch);
+
+  //   //Select type as Manual Test
+  //   await page
+  //     .locator(
+  //       '//*[@id="dialog-test-specifications-container"]/div[3]/div[1]/div[3]/select'
+  //     )
+  //     .selectOption("2");
+  //   //Select Trip Detection Method
+  //   await page
+  //     .locator(
+  //       '//*[@id="dialog-test-specifications-container"]/div[3]/div[2]/div[1]/div[1]/select'
+  //     )
+  //     .click();
+  //   await page
+  //     .locator(
+  //       '//*[@id="dialog-test-specifications-container"]/div[3]/div[2]/div[1]/div[1]/select'
+  //     )
   //     .selectOption("3");
   //   //Set Point Tolerance
   //   // expect(await page.locator('//div[@class="dialog-test-specification-container "]/div[2]/div[5]/div[1]').textContent()).toEqual("Tolerance")
