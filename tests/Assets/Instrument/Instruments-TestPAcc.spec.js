@@ -1,179 +1,90 @@
 import { test, expect } from "@playwright/test";
-import { assets } from "../../../pages/assets";
+import loginPage  from '../../../pages/loginPage';
+import InstrumentMulti from '../../../pages/InstrumentMulti';
 
-test.describe("Create New Assets record", () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto(
-      "https://pcxstaging.primetechpa.com/Identity/Login?ReturnUrl=%2F"
-    );
-  });
 
-  test.afterEach(async ({ page }) => {
-    await page.close();
-  });
 
   test("Create New Instrument record- Test Point Accuracy", async ({
     page,
   }) => {
-    const login = new assets(page);
+    let login = new loginPage(page);
+    let instruments = new InstrumentMulti(page);
     //Login to Application
+    await login.navigateUrl();
     await expect(page).toHaveTitle("PCX - Sign In");
-    await login.login("deepakr@inzerotech.com", "Deepak@605");
+    await login.loginApp("deepakr@inzerotech.com", "Deepak@605");
+    //Login to Application  
+    await page.waitForLoadState();
+    await expect(page).toHaveURL('https://pcxstaging.primetechpa.com/Dashboards');
+    await expect(page).toHaveTitle("PCX - Dashboard")
+    await expect(page.locator(".selected-filter-name")).toHaveText('Dashboard');
 
     //Click on New
-    await page.getByRole("link", { name: " New" }).click();
-    //Click on New Instrument
-    await page.getByText("Instrument").click();
-    //Maximize window
-    await page
-      .locator("//body[1]/div[2]/div[1]/div[1]/div[1]/div[2]/i[1]")
-      .click();
-    //Fill Page Details
-    var minNumber = 30;
-    var maxNumber = 1000;
+    await instruments.clickOnNewBtn();
+     //Click on Instrument link
+     await instruments.clickOnInstrument();
 
-    var randomNumber = randomNumberFromRange(minNumber, maxNumber);
+     //Maximize window
+     await instruments.maximizeWindow();
+     //Fill Page Details 
+     await instruments.fillManualAssetId();        
+     // Fill Description
+     await instruments.fillInstrumentsName("Instruments Calibration");
+     //Fill Manufacturer
+     await instruments.fillManufectureName("Fluke");  
+     
+     // Select Physical Location
+     await instruments.selectPhysicalLoc("51");
+    
+     // Fill Model Number   
+     await instruments.fillModelNumber("M-4258");
+     // await page.waitForLoadState();
+     //Select functional Location    
+     await instruments.functionalLoc("Noise Room");
+     //Fill Serial Number
+     await instruments.fillSerialNum("SN-58");
+    
+     //Select Department ID
+     await instruments.selectDepartment("34");
+     
+     await instruments.classificationVal();
+ 
+ 
+ 
+    await instruments.frequencyVal("3");
+ 
+     // Date pic
+     await instruments.datePic();
+     //Fill Remarks
+     await instruments.remarks("Calibration on Instrument")
+ 
+     //Click on Test Specification Tab
+     await instruments.clickOnTestSpecification();
+     
+     await page.waitForLoadState();
+     //Fill Title
+     await instruments
+       .fillTitle(instruments.randomManual);
+     //Select type as Manual Test
+     await instruments.selectTypeTest("3");
+    //Select Stratgey
+    await instruments.selectStrategy("3");
+    //fill Low range
+    await instruments.fillTPALowRange("10");
+    //fill high range
+    await instruments.fillTPAHighRange("50");
 
-    function randomNumberFromRange(min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min);
-    }
+    //select resolution
+    await instruments.selectTPAResolustion("3");
 
-    function formatDate(secs) {
-      const date = new Date(0);
-      date.setUTCSeconds(secs);
-      return date.toLocaleDateString();
-    }
+    //SELECT unit
+    await instruments.selectTPAUnit("nm");
+    //select tolrence
+    await instruments.selectTPAResolustion("3");
 
-    let locString = "Test Point-Id-" + randomNumber;
-    //random value input in Asset ID
-    await page.locator("#dialog-asset-id").click();
-    await page.locator("#dialog-asset-id").fill(locString);
-    await page.locator("#dialog-asset-name").click();
-    await page.locator("#dialog-asset-name").fill("Instrument Calibration");
-    await page.locator("#dialog-asset-manufacturer").click();
-    await page.locator("#dialog-asset-manufacturer").fill("fluke");
-    await page.locator("#ui-id-3").click();
-    await page.locator("select[name='PhysicalLocationId']").selectOption("51");
+    //fill tolrance 
+    await instruments.fillTPATolrance("5");
 
-    await page.locator('input[name="ModelNumber"]').click();
-    await page.locator('input[name="ModelNumber"]').fill("258");
-    await page.locator('input[name="FunctionalLocation"]').click();
-    await page.locator('input[name="FunctionalLocation"]').fill("Noise Room");
-    await page.locator('input[name="SerialNumber"]').click();
-    await page.locator('input[name="SerialNumber"]').fill("25886");
-
-    await page.locator('select[name="DepartmentId"]').selectOption("34");
-    await page.locator(".selectize-input").click();
-
-    await page.getByText("Classification 1").click();
-    await page.getByText("Critical", { exact: true }).click();
-
-    await page
-      .locator('//*[@id="tab-asset-details"]/div[3]/div[3]/select')
-      .selectOption("3");
-
-    // Date pic
-    const CDate = formatDate();
-    await page.click(
-      '//*[@id="tab-asset-details"][@id="tab-asset-details"]/div[3]/div[2]/div/span/i'
-    );
-    await page
-      .locator('//*[@id="tab-asset-details"]/div[3]/div[2]/div/input')
-      .fill(CDate);
-    // const mmYY = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/div')
-    // const prev = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/a[1]')
-    // const next = page.locator('//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/div/a[2]')
-    // await next.click();
-    await page.click(
-      '//*[@id="ui-datepicker-div"][@id="ui-datepicker-div"]/table/tbody/tr[4]/td[6]/a'
-    );
-
-    await page.locator("#dialog-asset-remarks").click();
-    await page.locator("#dialog-asset-remarks").fill("Calibration");
-    //Click on Test Standard Tab
-    await page
-      .getByRole("listitem")
-      .filter({ hasText: "Test Specifications" })
-      .click();
-    // await page.pause();
-    let locString1 = "Asset-Calibration-" + randomNumber;
-    await page.getByRole("textbox").click();
-    await page.getByRole("textbox").fill(locString1);
-
-    await page
-      .locator(
-        "//*[@class='dialog-test-specification-container']/div[1]/div[3]/select"
-      )
-      .selectOption("3");
-    await page
-      .locator(
-        '//*[@class="dialog-test-specification-container"]/div[2]/div[1]/div[1]/select'
-      )
-      .selectOption("3");
-
-    await page
-      .locator(
-        '//div[@class="dialog-test-specification-type-container"]/div[3]/div[2]/input'
-      )
-      .click();
-    await page
-      .locator(
-        '//div[@class="dialog-test-specification-type-container"]/div[3]/div[2]/input'
-      )
-      .fill("10");
-    await page
-      .locator(
-        '//div[@class="dialog-test-specification-type-container"]/div[3]/div[3]/input'
-      )
-      .click();
-    await page
-      .locator(
-        '//div[@class="dialog-test-specification-type-container"]/div[3]/div[3]/input'
-      )
-      .fill("50");
-      await page
-      .locator(
-        '//div[@class="dialog-test-specification-type-container"]/div[3]/div[4]/select'
-      )
-      .click();
-    await page
-      .locator(
-        '//div[@class="dialog-test-specification-type-container"]/div[3]/div[4]/select'
-      )
-      .selectOption("2");
-    // await page.pause();
-    await page
-      .locator("div:nth-child(5) > .selectize-control > .selectize-input")
-      .click();
-
-    await page
-      .locator(
-        '//div[@class="selectize-control single"]/div[1]/input'
-      )
-      .fill("nm");
-    await page
-      .locator(
-        '//div[@class="selectize-control single"]/div[2]/div[1]/div[49]'
-      )
-      .click();
-    await page
-      .locator(
-        '//div[@class="dialog-test-specification-type-container"]/div[5]/div[2]/select'
-      )
-      .selectOption("1");
-    await page
-      .locator(
-        '//div[@class="dialog-test-specification-type-container"]/div[5]/div[3]/input'
-      )
-      .fill("5");
-
-    await page.getByRole("button", { name: "Save and Close" }).click({timeout:100});
-
-    await page.locator(".avatar-initials").click();
-    await page
-      .locator(
-        "//ul[@class='pcx-dropdown-menu primary-nav-dropdown-menu user-dropdown-menu align-right']/li[4]"
-      )
-      .click();
+    await instruments.saveAndClose();
   });
-});
+

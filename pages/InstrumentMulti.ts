@@ -1,4 +1,4 @@
-import { Page, Locator, test, expect } from "@playwright/test";
+import { Page } from "@playwright/test";
 export default class InstrumentMulti {
 
   readonly page: Page;
@@ -17,6 +17,13 @@ export default class InstrumentMulti {
   DEP_ID = "select[name='DepartmentId']";
   FREQ_VAL = "select[name='CalibrationFrequencyId']";
   REMARKS = "#dialog-asset-remarks";
+  STRAGETY = "//select[@data-pcx-selected-id='0']";
+  TPA_LOWRANGE = "(//label[text()='Low']/following-sibling::input)[1]";
+  TPA_HIGHRANGE = "(//label[text()='High']/following-sibling::input)[1]";
+  TPA_TPARESULOSTION = "(//label[text()='Resolution']/following-sibling::select)[1]";
+  TPA_TOLRANCE = "//label[text()='Tolerance Type']/following-sibling::select";
+  TPA_TOLRANCEVAL = "//label[text()='Tolerance']/following-sibling::input";
+
   constructor(page: Page) {
     this.page = page
     
@@ -45,12 +52,33 @@ export default class InstrumentMulti {
     await this.page.locator(this.INSTRUMENT_BTN).click();
   }
 
+  async clickOnModule(text: string) {
+    await this.page.click(`//a[.='${text}']`)
+  }
+
   async maximizeWindow() {
     await this.page.locator(this.MAX_WINDOW).click();
   }
 
   async fillManualAssetId() {
     await this.page.locator(this.INSTRUMENT_ID).fill(this.instrumentId);
+  }
+
+  async fillSwitchRecord() {
+    await this.page.locator("(//label[@title='Title is required.']/following-sibling::input)[3]").fill(this.randomSwitch);
+    await this.page.selectOption("(//label[@title='Type is required.']/following-sibling::select)[3]", "2");
+    // await this.page.selectOption("//select[@data-pcx-load-url='/TripDetectionMethods/SelectList']", "3");
+    // await this.page.type("(//label[text()='Set Point Tolerance']/following::input)[1]", "5");
+    // await this.page.waitForTimeout(500);
+    // await this.page.fill("((//label[text()='Low'])[3]/following::input)[1]", "10");
+    // await this.page.fill("((//label[text()='High'])[3]/following::input)[1]", "50");
+    // await this.page.selectOption("(//label[text()='Resolution']/following-sibling::select)[3]", "2");
+
+    // await this.selectManualUnit("nm");
+    await this.page.fill("input.dialog-set-points-table-value.error-border", "5");
+    await this.page.selectOption("//select[@class='dialog-set-points-table-direction-id error-border']", "1");
+    await this.page.selectOption("//select[@class='dialog-set-points-table-trip-state-id error-border']", "2");
+    await this.page.click("//i[@title='List View']");
   }
 
   async fillSwicthAssetId() {
@@ -172,12 +200,18 @@ export default class InstrumentMulti {
       .selectOption(option);
   }
 
-  async selectUnit(unit: string) {
+  async selectManualUnit(text: string) {
+    await this.page.fill("//input[@type='select-one']", text);
+    await this.page.click(`//div[text()='${text}']`);
+  }
+
+  async selectTPAUnit(text: string) {
     await this.page
       .locator(
-        '//*[@id="dialog-test-specifications-container"]/div[2]/div[2]/div[1]/div[5]/div/div[1]/input'
+        `(//input[@type='select-one'])[2]`
       )
-      .fill(unit);
+      .fill(text);
+    await this.page.click(`//div[text()='${text}']`);
   }
 
   async selectTolrence(tol: string) {
@@ -263,8 +297,54 @@ export default class InstrumentMulti {
     await this.page.locator("(//button[contains(@class,'pcx-button button-primary')])[1]").click();
   }
 
-  async snapshotTest() {
+  async selectStrategy(option:string) {
+    await this.page.selectOption(this.STRAGETY, option)
+  }
 
-}
+  async fillTPALowRange(value:string) {
+    await this.page.type(this.TPA_LOWRANGE, value)
+  }
+
+  async fillTPAHighRange(option: string) {
+    await this.page.type(this.TPA_HIGHRANGE, option);
+  }
+
+  async selectTPAResolustion(option: string) {
+    await this.page.selectOption(this.TPA_TPARESULOSTION, option)
+  }
+
+  async selectTPATolrance(option: string) {
+    await this.page.selectOption(this.TPA_TOLRANCE, option)
+  }
+
+  async fillTPATolrance(value: string) {
+    await this.page.type(this.TPA_TOLRANCEVAL, value);
+  }
+
+  async clickOnSearchBox() {
+    await this.page.click("i.search-options.fas");
+  }
+
+  async fillSearchManualAssetId() {
+    await this.page.fill("input[name='AssetId']", this.instrumentId);
+    await this.page.click("//button[text()='Search']");
+  }
+
+  async selectSearchRecord() {
+    await this.page.waitForTimeout(500);
+    await this.page.click("(//tr[@data-pcx-type='Instrument'])[1]");
+  }
+  async selectedOperation(value: string) {
+  
+    await this.page.click(`(//i[@title='${value}'])[1]`);
+  }
+  
+  async selectEditRecordNav(text: string) {
+    await this.page.click(`//a[contains(text(),'${text}')]`);
+  }
+
+  async clickOnTestSpecNew() {
+    await this.page.click("(//i[@title='Add Test Specification'])[3]");
+  }
   
 }
